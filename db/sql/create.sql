@@ -13,19 +13,19 @@ DROP TABLE IF EXISTS school_years;
 
 CREATE TABLE IF NOT EXISTS school_years
 (
-    name            VARCHAR(50) NOT NULL,
-    starts_at       DATE        NULL,
-    ends_at         DATE        NULL,
-    is_current_year boolean          DEFAULT FALSE,
-    created_at      TIMESTAMP   NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at      TIMESTAMP   NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at      TIMESTAMP   NULL DEFAULT NULL,
-    PRIMARY KEY (name)
+    id              BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name            VARCHAR(50)     NOT NULL UNIQUE,
+    starts_at       DATE            NULL,
+    ends_at         DATE            NULL,
+    is_current_year boolean              DEFAULT FALSE,
+    created_at      TIMESTAMP       NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP       NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at      TIMESTAMP       NULL DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS teachers
 (
-    id         VARCHAR(50)  NOT NULL,
+    id              BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name  VARCHAR(100) NOT NULL,
     email      VARCHAR(150) NULL,
@@ -123,20 +123,18 @@ CREATE TABLE IF NOT EXISTS students
 # Idem pour le local
 CREATE TABLE IF NOT EXISTS sessions
 (
-    id             BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT,
-
-    aa_code        VARCHAR(50)      NOT NULL,
-    ue_code        VARCHAR(50)      NOT NULL,
-    school_year    VARCHAR(50)      NOT NULL,
-
-    title          VARCHAR(255)     NULL,
-    teacher_id     VARCHAR(50)      NOT NULL,
-    starts_at      DATETIME         NOT NULL,
-    ends_at    DATETIME        NULL,
-    classroom      VARCHAR(50)      NOT NULL,
-    created_at     TIMESTAMP        NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at     TIMESTAMP        NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at     TIMESTAMP        NULL DEFAULT NULL,
+    id          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    aa_code     VARCHAR(50)     NOT NULL,
+    ue_code     VARCHAR(50)     NOT NULL,
+    school_year VARCHAR(50)     NOT NULL,
+    title       VARCHAR(255)    NULL,
+    teacher_id  VARCHAR(50)     NOT NULL,
+    starts_at   DATETIME        NOT NULL,
+    ends_at     DATETIME        NULL,
+    classroom   VARCHAR(50)     NOT NULL,
+    created_at  TIMESTAMP       NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at  TIMESTAMP       NULL DEFAULT NULL,
     PRIMARY KEY (id),
     CONSTRAINT uq_sessions UNIQUE (aa_code, ue_code, school_year, classroom, starts_at),
     CONSTRAINT fk_sessions_school_years FOREIGN KEY (school_year) REFERENCES school_years (name) ON DELETE RESTRICT ON UPDATE CASCADE,
