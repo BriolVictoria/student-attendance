@@ -1,5 +1,4 @@
-<?php include 'views/partials/head.php' ?>
-
+<?php include VIEWS_DIR . '/partials/head.php' ?>
 <?php global $title ?>
 <main class="page-main">
     <h1><?php echo $title ?></h1>
@@ -21,7 +20,7 @@
 </main>
 
 
-<?php include 'views/partials/nav.php' ?>
+<?php include VIEWS_DIR . '/partials/nav.php' ?>
 
 
-<?php include 'views/partials/footer.php' ?>
+<?php include VIEWS_DIR . '/partials/footer.php' ?>
