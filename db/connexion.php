@@ -1,9 +1,18 @@
 <?php
-$host = '127.0.0.1';
-$db_name = 'students';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4'; 
+
+/*const PUBLIC_PATH = __DIR__;
+const APP_PATH = PUBLIC_PATH . '/..';
+const VENDOR_PATH = PUBLIC_PATH . '/../vendor';
+require VENDOR_PATH . '/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(APP_PATH);
+$dotenv->load();*/
+
+$host = env('DB_HOST');
+$db_name = env('DB_DATABASE');
+$user = env('DB_USERNAME');
+$pass = env('DB_PASSWORD');
+$charset = env('DB_CHARSET');
 $dsn = "mysql:host=$host;dbname=$db_name;charset=$charset";
 
 $options = [
