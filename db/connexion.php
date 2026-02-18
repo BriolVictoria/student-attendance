@@ -21,9 +21,8 @@ $options = [
     PDO::ATTR_EMULATE_PREPARES => false,
 ];
 
-
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (PDOException $e) {
-    echo 'Erreur de connexion : ' . $e->getMessage();
+    echo 'Erreur de connexion : '.$e->getMessage();
 }
