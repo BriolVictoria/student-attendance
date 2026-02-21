@@ -1,12 +1,10 @@
 <?php
 
-/*const PUBLIC_PATH = __DIR__;
-const APP_PATH = PUBLIC_PATH . '/..';
-const VENDOR_PATH = PUBLIC_PATH . '/../vendor';
-require VENDOR_PATH . '/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(APP_PATH);
-$dotenv->load();*/
+require_once __DIR__ . '/../vendor/autoload.php';
+if (!isset($dotenv)) {
+    $dotenv = Dotenv\Dotenv::createImmutable('/../');
+    $dotenv->load();
+}
 
 $host = env('DB_HOST');
 $db_name = env('DB_DATABASE');
