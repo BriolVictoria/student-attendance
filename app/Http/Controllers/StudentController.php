@@ -1,10 +1,17 @@
 <?php
 
-function index()
-{
-    require MODELS_PATH . '/Student.php';
-    $title = 'Tous les étudiants';
-    $students = all();
+namespace Attendances\Controllers;
 
-    view('students.index', compact('title', 'students'));
+class StudentController
+{
+    static function index():void
+    {
+        /*require MODELS_PATH . '/Student.php';
+        $students = all();*/
+        $students = \Attendances\Models\Student::all();
+        $title = 'Tous les étudiants';
+
+
+        view('students.index', compact('title', 'students'));
+    }
 }

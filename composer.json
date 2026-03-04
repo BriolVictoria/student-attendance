@@ -5,7 +5,11 @@
     "ext-pdo": "*"
   },
   "autoload": {
-    "files": ["toby/helpers/functions.php"]
+    "files": ["toby/helpers/functions.php"],
+    "psr-4": {
+      "Attendances\\Controllers\\": "app/Http/Controllers",
+      "Attendances\\Models\\": "app/Models"
+    }
   },
   "require-dev": {
     "laravel/pint": "^1.27"

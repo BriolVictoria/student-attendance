@@ -1,8 +1,14 @@
 <?php
 
-function index()
-{
-    $title = 'Page d’accueil';
+namespace Attendances\Controllers;
 
-    view('home', compact('title'));
+class HomeController
+{
+    static function index():void
+    {
+        $title = 'Page d’accueil';
+
+        view('home', compact('title'));
+    }
 }
+
