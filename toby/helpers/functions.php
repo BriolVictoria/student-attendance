@@ -2,7 +2,7 @@
 
 use JetBrains\PhpStorm\NoReturn;
 
-if (! function_exists('dd')) {
+if (!function_exists('dd')) {
     #[NoReturn]
     function dd(...$vars): void
     {
@@ -11,7 +11,7 @@ if (! function_exists('dd')) {
     }
 }
 
-if (! function_exists('env')) {
+if (!function_exists('env')) {
     function env(string $key, $default = null): mixed
     {
         return $_ENV[$key] ?? $default;
@@ -35,15 +35,22 @@ if (!function_exists('db_connexion')) {
         ];
 
         try {
-             return new PDO($dsn, $user, $pass, $options);
+            return new PDO($dsn, $user, $pass, $options);
         } catch (PDOException $e) {
-            echo 'Erreur de connexion : '.$e->getMessage();
+            echo 'Erreur de connexion : ' . $e->getMessage();
         }
 
     }
 }
 
-
+if (!function_exists('view')) {
+    function view(string $name = '', array $data = []): void
+    {
+        $name = str_replace('.', '/', $name);
+        extract($data);
+        include VIEWS_PATH . '/' . $name . '.blade.php';
+    }
+}
 
 
 

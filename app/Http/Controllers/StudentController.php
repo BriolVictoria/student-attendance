@@ -6,5 +6,5 @@ function index()
     $title = 'Tous les étudiants';
     $students = all();
 
-    include VIEWS_PATH.'/students/index.php';
+    view('students.index', compact('title', 'students'));
 }
