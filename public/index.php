@@ -2,29 +2,26 @@
 
 require __DIR__ . '/../bootstrap/app.php';
 
-require VENDOR_PATH.'/autoload.php';
+require VENDOR_PATH . '/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(ROOT_PATH);
 $dotenv->load();
 
-include '../db/queries.php';
-
-$title = '';
 
 switch ($_SERVER['REQUEST_URI']) {
     case '':
     case '/':
-        $title = 'Page d’accueil';
-        include VIEWS_DIR.'/home.php';
+        require CONTROLLERS_PATH . '/HomeController.php';
+        index();
         break;
     case '/presences':
-        $title = 'Prendre les présences';
-        include VIEWS_DIR.'/attendances/index.php';
+        require CONTROLLERS_PATH . '/AttendanceController.php';
+        index();
         break;
     case '/etudiants':
-        $title = 'Tous les étudiants';
-        include VIEWS_DIR.'/students/index.php';
+        require CONTROLLERS_PATH . '/StudentController.php';
+        index();
         break;
     default:
         $title = '404';
-        include VIEWS_DIR.'/404.php';
+        include VIEWS_PATH . '/404.php';
 }
