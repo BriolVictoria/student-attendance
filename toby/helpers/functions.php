@@ -6,8 +6,11 @@ if (!function_exists('dd')) {
     #[NoReturn]
     function dd(...$vars): void
     {
-        var_dump($vars);
-        exit();
+        foreach ($vars as $var) {
+            var_dump($var);
+            echo PHP_EOL;
+        }
+        die();
     }
 }
 
@@ -18,15 +21,17 @@ if (!function_exists('env')) {
     }
 }
 
-if (!function_exists('db_connexion')) {
-    function db_connexion(): PDO|null
+if (!function_exists('db_connection')) {
+    function db_connection(): ?PDO
     {
+        $connection = env('DB_CONNECTION');
         $host = env('DB_HOST');
         $db_name = env('DB_DATABASE');
         $user = env('DB_USERNAME');
         $pass = env('DB_PASSWORD');
         $charset = env('DB_CHARSET');
-        $dsn = "mysql:host=$host;dbname=$db_name;charset=$charset";
+
+        $dsn = "$connection:host=$host;dbname=$db_name;charset=$charset";
 
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -34,21 +39,29 @@ if (!function_exists('db_connexion')) {
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
 
+
         try {
             return new PDO($dsn, $user, $pass, $options);
         } catch (PDOException $e) {
             echo 'Erreur de connexion : ' . $e->getMessage();
         }
 
+        return null;
     }
 }
 
 if (!function_exists('view')) {
-    function view(string $name = '', array $data = []): void
+    function view(string $name, array $data = []): void
     {
         $name = str_replace('.', '/', $name);
-        extract($data);
-        include VIEWS_PATH . '/' . $name . '.blade.php';
+        $view = VIEWS_PATH . '/' . $name . '.php';
+        if (file_exists($view)) {
+            extract($data);
+            include $view;
+        }else{
+            die('La vue n’existe pas');
+        }
+
     }
 }
 
