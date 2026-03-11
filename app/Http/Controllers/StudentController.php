@@ -1,6 +1,6 @@
 <?php
 
-namespace Attendances\Controllers;
+namespace App\Http\Controllers;
 
 use App\Models\Student;
 

@@ -10,7 +10,7 @@ $dotenv->load();
 switch ($_SERVER['REQUEST_URI']) {
     case '':
     case '/':
-        Attendances\Controllers\HomeController::index();
+        \App\Http\Controllers\HomeController::index();
         /* Appel de la méthode index via une instance
          * Ne marche que si la méthode n'est pas déclarée statique
          * $controller = new HomeController();
@@ -18,10 +18,10 @@ switch ($_SERVER['REQUEST_URI']) {
         */
         break;
     case '/presences':
-        Attendances\Controllers\AttendanceController::index();
+        \App\Http\Controllers\AttendanceController::index();
         break;
     case '/etudiants':
-        Attendances\Controllers\StudentController::index();
+        \App\Http\Controllers\StudentController::index();
         break;
     default:
         $title = '404';

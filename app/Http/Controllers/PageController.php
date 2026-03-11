@@ -1,6 +1,6 @@
 <?php
 
-namespace Attendances\Controllers;
+namespace App\Http\Controllers;
 class PageController
 {
     static function home(): void
