@@ -5,9 +5,12 @@
     "ext-pdo": "*"
   },
   "autoload": {
-    "files": ["toby/helpers/functions.php"],
+    "files": [
+      "tecgdcs/helpers/functions.php"
+    ],
     "psr-4": {
-      "App\\": "app/"
+      "App\\": "app/",
+      "Tecgdcs\\" : "tecgdcs/classes/"
     }
   },
   "require-dev": {

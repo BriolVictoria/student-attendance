@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 class HomeController
 {
-    static function index():void
+    public function index():void
     {
         $title = 'Page d’accueil';
 

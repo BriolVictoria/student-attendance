@@ -1,24 +1,15 @@
 <?php
 
+use Tecgdcs\Router;
+
 require __DIR__ . '/../bootstrap/app.php';
 
 require VENDOR_PATH . '/autoload.php';
+
+session_start();
+
 $dotenv = Dotenv\Dotenv::createImmutable(ROOT_PATH);
 $dotenv->load();
 
-
-switch ($_SERVER['REQUEST_URI']) {
-    case '':
-    case '/':
-        \App\Http\Controllers\HomeController::index();
-        break;
-    case '/presences':
-        \App\Http\Controllers\AttendanceController::index();
-        break;
-    case '/etudiants':
-        \App\Http\Controllers\StudentController::index();
-        break;
-    default:
-        $title = '404';
-        include VIEWS_PATH . '/404.php';
-}
+$router = new Router();
+$router->route();

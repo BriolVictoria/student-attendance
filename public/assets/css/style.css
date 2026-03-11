@@ -263,3 +263,66 @@ button:hover {
     background-color: rgba(255, 255, 255, 0.25);
     font-weight: bold;
 }
+
+/* Formulaire d’ajout d’un étudiant */
+/* --- Formulaire d’ajout d’un étudiant --- */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+form span {
+    font-size: 0.9rem;
+    color: red;
+}
+
+/* groupes label + input */
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+/* labels */
+form label {
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+/* champs */
+form input[type="text"],
+form input[type="email"],
+form input[type="date"],
+form input[type="file"] {
+    all: revert;
+    padding: var(--space-sm);
+    border: 1px solid #ccc;
+    border-radius: var(--radius);
+    font-size: var(--font-size-base);
+    transition: border var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* focus champ */
+form input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(25, 79, 198, 0.15);
+    outline: none;
+}
+
+/* bouton */
+form button {
+    margin-top: var(--space-md);
+}
+
+/* petite indication fichier */
+form small {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* astérisque rouge */
+sup {
+    color: red;
+}
