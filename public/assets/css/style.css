@@ -326,3 +326,310 @@ form small {
 sup {
     color: red;
 }
+
+/*
+
+!*** RESET GLOBAL + VARIABLES CSS ***!
+!* --- RESET GLOBAL --- *!
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+    all: unset;
+    display: revert;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+a, button {
+    cursor: revert;
+}
+
+ol, ul, menu, summary {
+    list-style: none;
+}
+
+ol {
+    counter-reset: revert;
+}
+
+img {
+    max-block-size: 100%;
+    max-inline-size: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+input, textarea {
+    -webkit-user-select: auto;
+}
+
+textarea {
+    white-space: revert;
+}
+
+meter {
+    -webkit-appearance: revert;
+    appearance: revert;
+}
+
+:where(pre) {
+    all: revert;
+    box-sizing: border-box;
+}
+
+::placeholder {
+    color: unset;
+}
+
+:where([hidden]) {
+    display: none;
+}
+
+:where([contenteditable]:not([contenteditable="false"])) {
+    -webkit-line-break: after-white-space;
+    overflow-wrap: break-word;
+    -moz-user-modify: read-write;
+    -webkit-user-modify: read-write;
+    -webkit-user-select: auto;
+}
+
+:where([draggable="true"]) {
+    -webkit-user-drag: element;
+}
+
+:where(dialog:modal) {
+    all: revert;
+    box-sizing: border-box;
+}
+
+::-webkit-details-marker {
+    display: none;
+}
+
+!* --- VARIABLES GLOBALES --- *!
+:root {
+    --radius: 6px;
+    --space-lg: 2rem;
+    --color-light: #f5f5f5;
+    --font-main: "Helvetica Neue", Arial, sans-serif;
+    --space-md: 1rem;
+    --color-primary: #194fc6;
+    --color-secondary: #222;
+    --font-size-base: 16px;
+    --font-size-h1: 2rem;
+    --font-size-h2: 1.2rem;
+    --space-sm: 0.5rem;
+    --transition-speed: 0.3s;
+    --color-text: #222;
+    --color-text-light: #fff;
+    --space-xs: 0.25rem;
+}
+
+!* --- STYLES PRINCIPAUX --- *!
+body {
+    background-color: var(--color-light);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    font-size: var(--font-size-h1);
+    padding: var(--space-lg) 0;
+    text-align: center;
+}
+
+main {
+    background-color: var(--color-text-light);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: var(--space-lg) auto;
+    padding: var(--space-lg);
+    width: clamp(300px, 90%, 700px);
+}
+
+main h1 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+ul.student-list {
+    list-style: none;
+    padding: 0;
+}
+
+ul.student-list li {
+    align-items: center;
+    display: flex;
+    margin: var(--space-sm) 0;
+}
+
+ul.student-list label {
+    cursor: pointer;
+    flex: 1;
+}
+
+label {
+    font-weight: 500;
+}
+
+label:not(:has(+input)){
+    font-weight: 400;
+    cursor: pointer;
+}
+
+input:not([type=file]) {
+    border: 1px solid lightgray;
+    border-radius: var(--radius);
+    box-shadow: rgba(0, 0, 0, 0.05) 0 0 5px;
+    padding: var(--space-sm);
+}
+
+input[type="checkbox"] {
+    all: revert; !* réapplique le style natif du navigateur *!
+    cursor: pointer;
+    margin-right: var(--space-sm);
+    transform: scale(1.2);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+form > div {
+    display: flex;
+    align-items: baseline;
+    gap:var(--space-md);
+}
+
+button {
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: var(--radius);
+    color: var(--color-text-light);
+    cursor: pointer;
+    display: block;
+    font-size: var(--font-size-base);
+    font-weight: bold;
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    transition: background-color var(--transition-speed) ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: var(--color-primary);
+}
+
+div:has(>.action){
+    margin-top: var(--space-lg);
+}
+
+.action {
+    background-color: var(--color-primary);
+    border-radius: var(--radius);
+    color: white;
+    font-weight: bold;
+    padding: var(--space-md);
+}
+
+.hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.currentStudent {
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius);
+    color: var(--color-primary);;
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+!* ordre visuel : nav remonte AVANT tout *!
+.page-nav {
+    order: -1;
+}
+
+!* header *!
+.page-header {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    padding: var(--space-lg) 0;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: var(--font-size-h1);
+    margin: 0;
+}
+
+!* main *!
+.page-main {
+    flex-grow: 1;
+}
+
+.page-footer {
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+    padding: var(--space-md);
+    text-align: center;
+}
+
+.page-nav {
+    background: var(--color-primary);
+}
+
+.page-nav ul {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.page-nav a {
+    border-radius: var(--radius);
+    color: var(--color-text-light);
+    display: block;
+    margin: var(--space-sm) var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    text-decoration: none;
+    transition: background-color var(--transition-speed);
+}
+
+.page-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.page-nav a.active {
+    background-color: rgba(255, 255, 255, 0.25);
+    font-weight: bold;
+}*/
