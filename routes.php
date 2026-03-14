@@ -1,29 +1,49 @@
 <?php
-
 return [
+    // Affichage page home
     [
         'url' => '/',
-        'verb' => 'GET',
-        'action' => [\App\Http\Controllers\HomeController::class, 'index'],
+        'method' => 'get',
+        'action' => [
+            \App\Http\Controllers\PageController::class,
+            'home',
+        ]
     ],
-    [
-        'url' => '/etudiants',
-        'verb' => 'GET',
-        'action' => [\App\Http\Controllers\StudentController::class, 'index'],
-    ],
-    [
-        'url' => '/etudiants/create',
-        'verb' => 'GET',
-        'action' => [\App\Http\Controllers\StudentController::class, 'create'],
-    ],
-    [
-        'url' => '/etudiants',
-        'verb' => 'POST',
-        'action' => [\App\Http\Controllers\StudentController::class, 'store'],
-    ],
+
+    // Affichage liste des présences
     [
         'url' => '/presences',
-        'verb' => 'GET',
-        'action' => [\App\Http\Controllers\AttendanceController::class, 'index'],
+        'method' => 'get',
+        'action' => [
+            \App\Http\Controllers\AttendanceController::class,
+            'index',
+        ]
+    ],
+
+    [
+        'url' => '/etudiants',
+        'method' => 'get',
+        'action' => [
+            \App\Http\Controllers\StudentController::class,
+            'index',
+        ]
+    ],
+
+    [
+        'url' => '/etudiants',
+        'method' => 'post',
+        'action' => [
+            \App\Http\Controllers\StudentController::class,
+            'store'
+        ],
+    ],
+
+    [
+        'url' => '/etudiants/create',
+        'method' => 'get',
+        'action' => [
+            \App\Http\Controllers\StudentController::class,
+            'create',
+        ]
     ],
 ];
