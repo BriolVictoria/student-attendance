@@ -3,7 +3,9 @@
     <h1><?= $title ?></h1>
 
     <form action="/etudiants" method="POST" enctype="multipart/form-data">
+        {{--Ajouter ça--}}
         <input type="hidden" name="_token" value="<?= csrf_token() ?>"/>
+
         <span>Les champs munis de * sont requis</span>
         <div>
             <label for="family-name">Nom de famille <sup>*</sup></label>
