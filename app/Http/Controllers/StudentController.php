@@ -27,6 +27,7 @@ class StudentController
         );
     }
 
+    /*Ajouter ça*/
     public function store(): void
     {
         if (!isset($_REQUEST['_token'], $_SESSION['token'])) {
