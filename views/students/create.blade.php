@@ -7,22 +7,22 @@
         <span>Les champs munis de * sont requis</span>
         <div>
             <label for="family-name">Nom de famille <sup>*</sup></label>
-            <input type="text" id="family-name" name="last_name" required>
+            <input type="text" id="family-name" name="last_name" placeholder="Jean" required>
         </div>
 
         <div>
             <label for="first-name">Prénom <sup>*</sup></label>
-            <input type="text" id="first-name" name="first_name" required>
+            <input type="text" id="first-name" name="first_name" placeholder="Valjean" required>
         </div>
 
         <div>
             <label for="matricule">Matricule <sup>*</sup></label>
-            <input type="text" id="matricule" name="matricule" required>
+            <input type="text" id="matricule" name="matricule" placeholder="785478erre" required>
         </div>
 
         <div>
             <label for="email">Adresse e-mail <sup>*</sup></label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" placeholder="jean.vajean@gmail.com" required>
         </div>
 
         <div>
