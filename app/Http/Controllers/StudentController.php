@@ -41,4 +41,18 @@ class StudentController
         // Demander au navigateur de se rediriger vers la page de résultat souhaitée
         die('enregistré');
     }
+
+    public function show(): void
+    {
+        $id = $_GET['id'];
+        $student = Student::getStudent($id);
+
+        $title = 'Fiche d‘un étudiant';
+
+        view(
+            'students.show',
+            compact('title', 'student')
+        );
+
+    }
 }

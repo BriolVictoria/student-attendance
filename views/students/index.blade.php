@@ -3,16 +3,17 @@
     <h1><?= $title ?></h1>
 
     <?php if (count($students) > 0) { ?>
-        <ol>
+    <ol>
             <?php foreach ($students as $student) { ?>
-                <li>
-                    <?= $student['first_name'] ?>
-                    &nbsp;<?= $student['last_name'] ?>
-                </li>
-            <?php } ?>
-        </ol>
+        <li>
+            <a href="/etudiant?id=<?= $student['id']?>">
+                <?= $student['first_name']?> <?= $student['last_name']?>
+            </a>
+        </li>
+        <?php } ?>
+    </ol>
     <?php } else { ?>
-        <p>Mais où sont-ils&nbsp;?</p>
+    <p>Mais où sont-ils&nbsp;?</p>
     <?php } ?>
 
 </main>

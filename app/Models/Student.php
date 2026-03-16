@@ -26,7 +26,7 @@ class Student
     }
 
 
-    function getStudent()
+    static function getStudent()
     {
         try {
             return db_connection()->query("SELECT *
