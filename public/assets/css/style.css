@@ -16,6 +16,22 @@ html {
     scroll-behavior: smooth;
 }
 
+div {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+dl {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+dt {
+    font-weight: bold;
+}
+
 a, button {
     cursor: revert;
 }
@@ -131,6 +147,7 @@ main {
 main h1 {
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    font-weight: bold;
 }
 
 ul.student-list {
@@ -156,11 +173,25 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-button {
+button, .button {
     display: block;
     width: 100%;
     margin-top: var(--space-lg);
     background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    padding: var(--space-md);
+    font-size: var(--font-size-base);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.delete{
+    display: block;
+    width: 100%;
+    margin-top: var(--space-lg);
+    background-color: red;
     color: var(--color-text-light);
     border: none;
     padding: var(--space-md);
@@ -224,6 +255,9 @@ button:hover {
 /* main */
 .page-main {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .page-footer {

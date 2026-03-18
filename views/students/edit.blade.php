@@ -5,31 +5,30 @@
     <form action="/etudiants" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="<?= csrf_token() ?>"/>
 
-
         <span>Les champs munis de * sont requis</span>
         <div>
             <label for="family-name">Nom de famille <sup>*</sup></label>
-            <input type="text" id="family-name" name="last_name" placeholder="Jean" required>
+            <input type="text" id="family-name" name="last_name" placeholder="Jean" required value="<?= $student->last_name ?>">
         </div>
 
         <div>
             <label for="first-name">Prénom <sup>*</sup></label>
-            <input type="text" id="first-name" name="first_name" placeholder="Valjean" required>
+            <input type="text" id="first-name" name="first_name" placeholder="Valjean" required value="<?= $student->first_name ?>">
         </div>
 
         <div>
             <label for="matricule">Matricule <sup>*</sup></label>
-            <input type="text" id="matricule" name="matricule" placeholder="785478erre" required>
+            <input type="text" id="matricule" name="matricule" placeholder="785478erre" required value="<?= $student->matricule ?>">
         </div>
 
         <div>
             <label for="email">Adresse e-mail <sup>*</sup></label>
-            <input type="email" id="email" name="email" placeholder="jean.vajean@gmail.com" required>
+            <input type="email" id="email" name="email" placeholder="jean.vajean@gmail.com" required value="<?= $student->email ?>">
         </div>
 
         <div>
             <label for="birth-date">Date de naissance</label>
-            <input type="date" id="birth-date" name="birth_date">
+            <input type="date" id="birth-date" name="birth_date" value="<?= $student->birth_date ?>">
         </div>
 
         <div>
@@ -37,9 +36,8 @@
             <input type="file" id="profile-photo" name="profile_photo">
         </div>
 
-
         <div>
-            <button type="submit">Ajouter la fiche</button>
+            <button type="submit">Modifier l’étudiant</button>
         </div>
 
     </form>

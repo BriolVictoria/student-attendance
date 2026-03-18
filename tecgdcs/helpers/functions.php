@@ -35,7 +35,7 @@ if (!function_exists('db_connection')) {
 
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
 
@@ -69,6 +69,13 @@ if (!function_exists('csrf_token')) {
     function csrf_token(int $length = 32): string
     {
         return $_SESSION['token'] = bin2hex(random_bytes($length));
+    }
+}
+
+if (!function_exists('method_delete')) {
+    function method_delete(): void
+    {
+        dd('test');
     }
 }
 

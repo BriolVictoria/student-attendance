@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 class Student
 {
@@ -26,7 +27,7 @@ class Student
     }
 
 
-    static function getStudent()
+    static function getStudentByName()
     {
         try {
             return db_connection()->query("SELECT *
@@ -35,5 +36,20 @@ FROM students WHERE first_name LIKE '%a%'")->fetch();
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+    }
+
+    static function getStudentById(int $id)
+    {
+        $sql = 'SELECT * FROM students WHERE id = :id';
+        $sth = db_connection()->prepare($sql);
+        $sth->execute(['id' => $id]);
+        try {
+            return $sth->fetch();
+
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return null;
     }
 }

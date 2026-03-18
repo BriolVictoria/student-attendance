@@ -9,6 +9,7 @@ return [
             'home',
         ]
     ],
+
     // Affichage liste des présences
     [
         'url' => '/presences',
@@ -18,6 +19,7 @@ return [
             'index',
         ]
     ],
+
     // Affichage liste des étudiants
     [
         'url' => '/etudiants',
@@ -27,6 +29,7 @@ return [
             'index',
         ]
     ],
+
     // Affichage la liste + l'étudiant ajouté
     [
         'url' => '/etudiants',
@@ -36,6 +39,7 @@ return [
             'store'
         ],
     ],
+
     // Affichage le formulaire de création de l'étudiant
     [
         'url' => '/etudiants/create',
@@ -45,6 +49,7 @@ return [
             'create',
         ]
     ],
+
     // Affichage la fiche de l'étudiant
     [
         'url' => '/etudiant',
@@ -52,6 +57,26 @@ return [
         'action' => [
             \App\Http\Controllers\StudentController::class,
             'show',
+        ]
+    ],
+
+    // Affichage la fiche d’édition de l’étudiant
+    [
+        'url' => '/etudiant/edit',
+        'method' => 'get',
+        'action' => [
+            \App\Http\Controllers\StudentController::class,
+            'edit',
+        ]
+    ],
+
+    // Suppression de l’étudiant
+    [
+        'url' => '/etudiant/delete',
+        'method' => 'delete',
+        'action' => [
+            \App\Http\Controllers\StudentController::class,
+            'destroy',
         ]
     ],
 ];

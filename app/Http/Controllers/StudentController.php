@@ -37,22 +37,51 @@ class StudentController
         if ($_REQUEST['_token'] !== $_SESSION['token']) {
             die('unauthorized');
         };
+
         // Stocker un étudiant en DB
         // Demander au navigateur de se rediriger vers la page de résultat souhaitée
+
         die('enregistré');
     }
 
     public function show(): void
     {
-        $id = $_GET['id'];
-        $student = Student::getStudent($id);
+        $id = (int)$_GET['id'];
+        $student = Student::getStudentById($id);
 
-        $title = 'Fiche d‘un étudiant';
+        $title = 'Fiche de ' . $student->first_name . ' ' . $student->last_name;
 
         view(
             'students.show',
             compact('title', 'student')
         );
+    }
 
+    public function edit(): void
+    {
+        $id = (int)$_GET['id'];
+        $student = Student::getStudentById($id);
+
+        $title = 'Modification de la fiche de ' . $student->first_name . ' ' . $student->last_name;
+
+        view(
+            'students.edit',
+            compact('title', 'student')
+        );
+
+
+    }
+
+    public function destroy(): void
+    {
+        $id = (int)$_GET['id'];
+        $student = Student::getStudentById($id);
+
+        $title = 'Suppresion de la fiche de ' . $student['first_name'] . ' ' . $student['last_name'];
+
+        view(
+            'students.delete',
+            compact('title', 'student')
+        );
     }
 }
