@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use PDOException;
+
 class Student
 {
     static function getAllStudents(): ?array
@@ -38,14 +40,20 @@ FROM students WHERE first_name LIKE '%a%'")->fetch();
         }
     }
 
-    static function getStudentById(int $id)
+    public static function getStudentById(int $id)
     {
-        $sql = 'SELECT * FROM students WHERE id = :id';
-        $sth = db_connection()->prepare($sql);
-        $sth->execute(['id' => $id]);
-        try {
-            return $sth->fetch();
+        $sql = <<<SQL
+                SELECT * 
+                FROM students
+                WHERE id = :id
+SQL;
 
+
+        try {
+            $pdo = db_connection();
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            return $stmt->fetch();
 
         } catch (PDOException $e) {
             echo $e->getMessage();
