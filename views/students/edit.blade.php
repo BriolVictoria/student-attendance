@@ -1,49 +1,68 @@
-<?php view('partials.head', compact('title')); ?>
+<?php view('partials.head', compact('title')) ?>
+
 <main class="page-main">
     <h1><?= $title ?></h1>
+    <section class="resource-actions">
+        <h2 class="sr-only">Actions relatives à <?= $student->first_name ?> <?= $student->last_name ?></h2>
+        <ul>
+            <li>
+                <form action="/etudiant" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value="<?= csrf_token() ?>">
+                    <input type="hidden" name="id" value="<?= $student->id ?>">
+                    <button type="submit">Supprimer <?= $student->first_name ?></button>
+                </form>
+            </li>
+        </ul>
+    </section>
 
-    <form action="/etudiants" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_token" value="<?= csrf_token() ?>"/>
-
-        <span>Les champs munis de * sont requis</span>
+    <form action="/etudiant" method="post">
+        <input type="hidden" name="id" value="<?= $student->id ?>">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="_token" value="<?= csrf_token() ?>">
         <div>
-            <label for="family-name">Nom de famille <sup>*</sup></label>
-            <input type="text" id="family-name" name="last_name" placeholder="Jean" required value="<?= $student->last_name ?>">
+            <label for="first_name">Prénom <sup>*</sup></label>
+            <input type="text" id="first_name" name="first_name" value="<?= $student->first_name ?>"
+                   placeholder="<?= $student->first_name ?>" required>
         </div>
-
         <div>
-            <label for="first-name">Prénom <sup>*</sup></label>
-            <input type="text" id="first-name" name="first_name" placeholder="Valjean" required value="<?= $student->first_name ?>">
+            <label for="last_name">Nom de famille <sup>*</sup></label>
+            <input type="text" id="last_name" name="last_name" value="<?= $student->last_name ?>"
+                   placeholder="<?= $student->last_name ?>" required>
         </div>
-
         <div>
             <label for="matricule">Matricule <sup>*</sup></label>
-            <input type="text" id="matricule" name="matricule" placeholder="785478erre" required value="<?= $student->matricule ?>">
+            <input type="text" id="matricule" name="matricule" value="<?= $student->matricule ?>"
+                   placeholder="<?= $student->matricule ?>" required>
+        </div>
+        <div>
+            <label for="email">Email <sup>*</sup></label>
+            <input type="email" id="email" name="email" value="<?= $student->email ?>"
+                   placeholder="<?= $student->email ?>" required>
         </div>
 
         <div>
-            <label for="email">Adresse e-mail <sup>*</sup></label>
-            <input type="email" id="email" name="email" placeholder="jean.vajean@gmail.com" required value="<?= $student->email ?>">
+            <label for="birth_date">Date de naissance</label>
+            <input type="date" id="birth_date" name="birth_date" value="<?= $student->birth_date ?>"
+                   placeholder="<?= $student->birth_date ?>">
         </div>
 
         <div>
-            <label for="birth-date">Date de naissance</label>
-            <input type="date" id="birth-date" name="birth_date" value="<?= $student->birth_date ?>">
+            <?php if ($student->profile_photo): ?>
+            <img src="<?= $student->profile_photo ?>"
+                 alt="Portrait de <?= $student->first_name ?> <?= $student->last_name ?>">
+            <?php endif ?>
+            <label for="profile_photo">Photo de profil</label>
+            <input type="file" id="profile_photo" name="profile_photo">
         </div>
-
         <div>
-            <label for="profile-photo">Photo de profil <small>jpeg ou png, 2mo maximum</small></label>
-            <input type="file" id="profile-photo" name="profile_photo">
+            <button type="submit">Enregistrer ces informations</button>
         </div>
-
-        <div>
-            <button type="submit">Modifier l’étudiant</button>
-        </div>
-
     </form>
 </main>
 
-<?php view('partials.nav'); ?>
+
+<?php view('partials.nav') ?>
 
 
-<?php view('partials.footer'); ?>
+<?php view('partials.footer') ?>
