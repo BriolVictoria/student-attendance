@@ -2,22 +2,7 @@
 
 <main class="page-main">
     <h1><?= $title ?></h1>
-    <section class="resource-actions">
-        <h2 class="sr-only">Actions relatives à <?= $student->first_name ?> <?= $student->last_name ?></h2>
-        <ul>
-            <li>
-                <a href="/etudiant/edit?id=<?= $student->id ?>">Modifier <?= $student->first_name ?></a>
-            </li>
-            <li>
-                <form action="/etudiant" method="post">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="_token" value="<?= csrf_token() ?>">
-                    <input type="hidden" name="id" value="<?= $student->id ?>">
-                    <button type="submit">Supprimer <?= $student->first_name ?></button>
-                </form>
-            </li>
-        </ul>
-    </section>
+
     <dl>
         <div>
             <dt>Prénom</dt>
@@ -50,6 +35,22 @@
         <?php endif; ?>
     </dl>
 
+    <section class="resource-actions">
+        <h2 class="sr-only">Actions relatives à <?= $student->first_name ?> <?= $student->last_name ?></h2>
+        <ul>
+            <li>
+                <a href="/etudiant/edit?id=<?= $student->id ?>">Modifier <?= $student->first_name ?></a>
+            </li>
+            <li>
+                <form action="/etudiant" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value="<?= csrf_token() ?>">
+                    <input type="hidden" name="id" value="<?= $student->id ?>">
+                    <button type="submit">Supprimer <?= $student->first_name ?></button>
+                </form>
+            </li>
+        </ul>
+    </section>
 
     <div>
         <a href="/etudiants" class="action">Voir tous les étudiants</a>

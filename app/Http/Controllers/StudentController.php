@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Tecgdcs\Response;
 
 class StudentController
 {
@@ -10,7 +12,7 @@ class StudentController
     {
         // Validation
         if (!isset($_REQUEST['id']) || !is_numeric($_REQUEST['id'])) {
-            die('Bad Request');
+            Response::abort(Response::BAD_REQUEST);
         }
 
         // Sanitisation | Nettoyage | Préparation
@@ -25,7 +27,7 @@ class StudentController
         }
 
         if ($_REQUEST['_token'] !== $_SESSION['token']) {
-            Response::abort(Response::FORBIDDEN);
+            Response::abort(Response::UNAUTHORIZED);
         };
     }
 
@@ -50,39 +52,34 @@ class StudentController
         );
     }
 
-    /*Ajouter ça*/
-
     public function store(): void
     {
-        if (!isset($_REQUEST['_token'], $_SESSION['token'])) {
-            die('bad request');
-        }
+        $this->check_csrf();
+        // Valider les données associées à la requête
 
-        if ($_REQUEST['_token'] !== $_SESSION['token']) {
-            die('unauthorized');
-        };
         // Stocker un étudiant en DB
+        $student = new Student();
+
+        $student->first_name = $_POST['first_name'];
+        $student->last_name = $_POST['last_name'];
+        $student->email = $_POST['email'];
+        $student->matricule = $_POST['matricule'];
+        $student->birth_date = empty($_POST['birth_date']) ? null : $_POST['birth_date'];
+
+        $student->save();
 
         // Demander au navigateur de se rediriger vers la page de résultat souhaitée
-        header('Location: /etudiants', response_code: 303);
+        Response::redirect('Location: /etudiant?id=' . $student->id);
     }
 
     public function show(): void
     {
-        // Validation
-        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-            die('Bad Request');
-        }
+        $id = $this->check_id();
 
-        // Sanitisation | Nettoyage | Préparation
-        $id = (int)$_GET['id'];
-
-        // Récupération des données
-        $student = Student::find($id);
-
-        // Gestion d'un cas d'exception
-        if (!$student) {
-            die('Student not found');
+        try {
+            $student = Student::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Response::abort();
         }
 
         $title = 'La fiche de ' . $student->first_name;
@@ -101,13 +98,10 @@ class StudentController
     {
         $id = $this->check_id();
 
-        // Récupération des données
-        $student = Student::find($id);
-
-
-        // Gestion d'un cas d'exception
-        if (!$student) {
-            die('Student not found');
+        try {
+            $student = Student::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Response::abort();
         }
 
         $title = 'La fiche de ' . $student->first_name;
@@ -124,31 +118,33 @@ class StudentController
     {
         $this->check_csrf();
 
+        // Validation des données qui bloque si les données sont invalides
+
         $id = $this->check_id();
 
         $student = Student::find($id);
 
-        $student->first_name = $_REQUEST['first_name'];
-        $student->last_name = $_REQUEST['last_name'];
-        $student->email = $_REQUEST['email'];
-        $student->matricule = $_REQUEST['matricule'];
+        $student->first_name = $_POST['first_name'];
+        $student->last_name = $_POST['last_name'];
+        $student->email = $_POST['email'];
+        $student->matricule = $_POST['matricule'];
+        $student->birth_date = empty($_POST['birth_date']) ? null : $_POST['birth_date'];
 
         $student->save();
 
-        header('Location: /etudiants', response_code: 303);
-        /*die('oui, update');*/
+
+        Response::redirect('Location: /etudiant?id=' . $student->id);
+
     }
 
     public function destroy(): void
     {
-        $id = (int)$_GET['id'];
-        $student = Student::find($id);
+        $this->check_csrf();
 
-        $title = 'Suppresion de la fiche de ' . $student['first_name'] . ' ' . $student['last_name'];
+        $id = $this->check_id();
 
-        view(
-            'students.delete',
-            compact('title', 'student')
-        );
+        Student::destroy($id);
+
+        Response::redirect('Location: /etudiants');
     }
 }
