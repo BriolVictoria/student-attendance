@@ -32,7 +32,7 @@ class StudentController
     public function index(): void
     {
         $title = 'Tous les étudiants';
-        $students = Student::getAllStudents();
+        $students = Student::all();
 
         view(
             'students.index',
@@ -78,7 +78,7 @@ class StudentController
         $id = (int)$_GET['id'];
 
         // Récupération des données
-        $student = Student::getStudentById($id);
+        $student = Student::find($id);
 
         // Gestion d'un cas d'exception
         if (!$student) {
@@ -142,7 +142,7 @@ class StudentController
     public function destroy(): void
     {
         $id = (int)$_GET['id'];
-        $student = Student::getStudentById($id);
+        $student = Student::find($id);
 
         $title = 'Suppresion de la fiche de ' . $student['first_name'] . ' ' . $student['last_name'];
 
