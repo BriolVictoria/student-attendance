@@ -667,3 +667,174 @@ div:has(>.action){
     background-color: rgba(255, 255, 255, 0.25);
     font-weight: bold;
 }*/
+
+/* =========================
+   FORMULAIRES (CREATE / EDIT)
+========================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* chaque champ */
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+/* labels */
+form label {
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+/* inputs */
+form input[type="text"],
+form input[type="email"],
+form input[type="date"],
+form input[type="file"] {
+    all: revert;
+    padding: var(--space-sm);
+    border: 1px solid #ccc;
+    border-radius: var(--radius);
+    font-size: var(--font-size-base);
+    transition: border var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* focus */
+form input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(25, 79, 198, 0.15);
+    outline: none;
+}
+
+/* bouton */
+form button {
+    margin-top: var(--space-md);
+}
+
+/* message */
+form span {
+    font-size: 0.9rem;
+    color: red;
+}
+
+/* =========================
+   ACTIONS (EDIT / SHOW)
+========================= */
+
+.resource-actions {
+    margin-bottom: var(--space-lg);
+}
+
+.resource-actions ul {
+    display: flex;
+    gap: var(--space-sm);
+    padding: 0;
+}
+
+/* bouton supprimer */
+.resource-actions button {
+    background-color: red;
+}
+
+/* lien modifier */
+.resource-actions a {
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius);
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color var(--transition-speed);
+}
+
+.resource-actions a:hover {
+    background-color: #123a91;
+}
+
+/* =========================
+   PAGE SHOW (DETAIL ETUDIANT)
+========================= */
+
+dl {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+dl div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding-bottom: var(--space-xs);
+}
+
+dt {
+    font-weight: bold;
+    color: var(--color-secondary);
+}
+
+dd {
+    color: var(--color-text);
+}
+
+/* image profil */
+img {
+    max-width: 120px;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   BOUTON ACTION (retour liste)
+========================= */
+
+.action {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color var(--transition-speed);
+}
+
+.action:hover {
+    background-color: #123a91;
+}
+
+/* =========================
+   ACCESSIBILITÉ
+========================= */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    border: 0;
+}
+
+.resource-actions ul {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.resource-actions li {
+    flex: 1;
+}
+
+.resource-actions a,
+.resource-actions button {
+    width: 100%;
+    text-align: center;
+}
