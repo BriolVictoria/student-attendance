@@ -70,6 +70,15 @@ return [
         ]
     ],
 
+    [
+        'url' => '/etudiant',
+        'method' => 'put',
+        'action' => [
+            \App\Http\Controllers\StudentController::class,
+            'update',
+        ]
+    ],
+
     // Suppression de l’étudiant
     [
         'url' => '/etudiant/delete',

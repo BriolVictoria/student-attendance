@@ -14,7 +14,7 @@ class Router
     {
         $this->routes = include ROOT_PATH . '/routes.php';
         $this->url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $this->method = $_SERVER['REQUEST_METHOD'];
+        $this->method = $_REQUEST['_method'] ?? $_SERVER['REQUEST_METHOD'];
     }
 
     private function check_route(): array

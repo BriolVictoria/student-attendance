@@ -1,6 +1,11 @@
 <?php view('partials.head', compact('title')); ?>
 <main class="page-main">
     <h1><?= $title ?></h1>
+    <ul>
+        <li>
+            <a href="/etudiant/edit?id=<?= $student->id ?>">Modifier <?= $student->first_name ?></a>
+        </li>
+    </ul>
 
     <dl>
         <div>

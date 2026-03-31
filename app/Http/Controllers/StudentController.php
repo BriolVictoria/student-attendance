@@ -6,6 +6,29 @@ use App\Models\Student;
 
 class StudentController
 {
+    private function check_id(): ?int
+    {
+        // Validation
+        if (!isset($_REQUEST['id']) || !is_numeric($_REQUEST['id'])) {
+            die('Bad Request');
+        }
+
+        // Sanitisation | Nettoyage | Préparation
+        return (int)$_REQUEST['id'];
+    }
+
+    private function check_csrf(): void
+    {
+
+        if (!isset($_REQUEST['_token'], $_SESSION['token'])) {
+            Response::abort(Response::BAD_REQUEST);
+        }
+
+        if ($_REQUEST['_token'] !== $_SESSION['token']) {
+            Response::abort(Response::FORBIDDEN);
+        };
+    }
+
     public function index(): void
     {
         $title = 'Tous les étudiants';
@@ -76,17 +99,44 @@ class StudentController
 
     public function edit(): void
     {
-        $id = (int)$_GET['id'];
-        $student = Student::getStudentById($id);
+        $id = $this->check_id();
 
-        $title = 'Modification de la fiche de ' . $student->first_name . ' ' . $student->last_name;
+        // Récupération des données
+        $student = Student::find($id);
 
-        view(
-            'students.edit',
-            compact('title', 'student')
+
+        // Gestion d'un cas d'exception
+        if (!$student) {
+            die('Student not found');
+        }
+
+        $title = 'La fiche de ' . $student->first_name;
+
+        view('students.edit',
+            compact(
+                'title',
+                'student'
+            )
         );
+    }
 
+    public function update(): void
+    {
+        $this->check_csrf();
 
+        $id = $this->check_id();
+
+        $student = Student::find($id);
+
+        $student->first_name = $_REQUEST['first_name'];
+        $student->last_name = $_REQUEST['last_name'];
+        $student->email = $_REQUEST['email'];
+        $student->matricule = $_REQUEST['matricule'];
+
+        $student->save();
+
+        header('Location: /etudiants', response_code: 303);
+        /*die('oui, update');*/
     }
 
     public function destroy(): void
