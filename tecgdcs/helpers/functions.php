@@ -1,6 +1,7 @@
 <?php
 
 use JetBrains\PhpStorm\NoReturn;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 if (!function_exists('dd')) {
     #[NoReturn]
@@ -22,31 +23,26 @@ if (!function_exists('env')) {
 }
 
 if (!function_exists('db_connection')) {
-    function db_connection(): ?PDO
+    function db_connection(): void
     {
-        $connection = env('DB_CONNECTION');
-        $host = env('DB_HOST');
-        $db_name = env('DB_DATABASE');
-        $user = env('DB_USERNAME');
-        $pass = env('DB_PASSWORD');
-        $charset = env('DB_CHARSET');
 
-        $dsn = "$connection:host=$host;dbname=$db_name;charset=$charset";
+        $capsule = new Capsule;
 
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        ];
+        $capsule->addConnection([
+            'driver' => env('DB_CONNECTION'),
+            'host' => env('DB_HOST'),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'charset' => env('DB_CHARSET'),
+            'collation' => env('DB_COLLATION'),
+            'prefix' => '',
+        ]);
 
+        $capsule->setAsGlobal();
 
-        try {
-            return new PDO($dsn, $user, $pass, $options);
-        } catch (PDOException $e) {
-            echo 'Erreur de connexion : ' . $e->getMessage();
-        }
+        $capsule->bootEloquent();
 
-        return null;
     }
 }
 
