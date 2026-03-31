@@ -81,7 +81,7 @@ return [
 
     // Suppression de l’étudiant
     [
-        'url' => '/etudiant/delete',
+        'url' => '/etudiant',
         'method' => 'delete',
         'action' => [
             \App\Http\Controllers\StudentController::class,
