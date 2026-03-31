@@ -28,6 +28,7 @@ class StudentController
     }
 
     /*Ajouter ça*/
+
     public function store(): void
     {
         if (!isset($_REQUEST['_token'], $_SESSION['token'])) {
@@ -37,24 +38,40 @@ class StudentController
         if ($_REQUEST['_token'] !== $_SESSION['token']) {
             die('unauthorized');
         };
-
         // Stocker un étudiant en DB
-        // Demander au navigateur de se rediriger vers la page de résultat souhaitée
 
-        die('enregistré');
+        // Demander au navigateur de se rediriger vers la page de résultat souhaitée
+        header('Location: /etudiants', response_code: 303);
     }
 
     public function show(): void
     {
+        // Validation
+        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+            die('Bad Request');
+        }
+
+        // Sanitisation | Nettoyage | Préparation
         $id = (int)$_GET['id'];
+
+        // Récupération des données
         $student = Student::getStudentById($id);
 
-        $title = 'Fiche de ' . $student->first_name . ' ' . $student->last_name;
+        // Gestion d'un cas d'exception
+        if (!$student) {
+            die('Student not found');
+        }
 
-        view(
-            'students.show',
-            compact('title', 'student')
+        $title = 'La fiche de ' . $student->first_name;
+
+        view('students.show',
+            compact(
+                'title',
+                'student'
+            )
         );
+
+
     }
 
     public function edit(): void
